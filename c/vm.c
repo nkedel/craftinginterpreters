@@ -1,12 +1,12 @@
 //> A Virtual Machine vm-c
-//> Types of Values not-yet
+//> Types of Values include-stdarg
 #include <stdarg.h>
-//< Types of Values not-yet
+//< Types of Values include-stdarg
 //> vm-include-stdio
 #include <stdio.h>
-//> Strings not-yet
+//> Strings vm-include-string
 #include <string.h>
-//< Strings not-yet
+//< Strings vm-include-string
 //> Calls and Functions not-yet
 #include <time.h>
 //< Calls and Functions not-yet
@@ -19,10 +19,10 @@
 //> vm-include-debug
 #include "debug.h"
 //< vm-include-debug
-//> Strings not-yet
+//> Strings vm-include-object-memory
 #include "object.h"
 #include "memory.h"
-//< Strings not-yet
+//< Strings vm-include-object-memory
 #include "vm.h"
 
 VM vm; // [one]
@@ -43,7 +43,7 @@ static void resetStack() {
 //< Closures not-yet
 }
 //< reset-stack
-//> Types of Values not-yet
+//> Types of Values runtime-error
 static void runtimeError(const char* format, ...) {
   va_list args;
   va_start(args, format);
@@ -51,7 +51,7 @@ static void runtimeError(const char* format, ...) {
   va_end(args);
   fputs("\n", stderr);
 
-/* Types of Values not-yet < Calls and Functions not-yet
+/* Types of Values runtime-error < Calls and Functions not-yet
   size_t instruction = vm.ip - vm.chunk->code;
   fprintf(stderr, "[line %d] in script\n",
           vm.chunk->lines[instruction]);
@@ -80,7 +80,7 @@ static void runtimeError(const char* format, ...) {
 
   resetStack();
 }
-//< Types of Values not-yet
+//< Types of Values runtime-error
 //> Calls and Functions not-yet
 
 static void defineNative(const char* name, NativeFn function) {
@@ -96,9 +96,9 @@ void initVM() {
 //> call-reset-stack
   resetStack();
 //< call-reset-stack
-//> Strings not-yet
+//> Strings init-objects-root
   vm.objects = NULL;
-//< Strings not-yet
+//< Strings init-objects-root
 //> Garbage Collection not-yet
   vm.bytesAllocated = 0;
   vm.nextGC = 1024 * 1024;
@@ -134,9 +134,9 @@ void freeVM() {
 //> Methods and Initializers not-yet
   vm.initString = NULL;
 //< Methods and Initializers not-yet
-//> Strings not-yet
+//> Strings call-free-objects
   freeObjects();
-//< Strings not-yet
+//< Strings call-free-objects
 }
 //> push
 void push(Value value) {
@@ -150,12 +150,11 @@ Value pop() {
   return *vm.stackTop;
 }
 //< pop
-//> Types of Values not-yet
-
+//> Types of Values peek
 static Value peek(int distance) {
   return vm.stackTop[-1 - distance];
 }
-//< Types of Values not-yet
+//< Types of Values peek
 /* Calls and Functions not-yet < Closures not-yet
 
 static bool call(ObjFunction* function, int argCount) {
@@ -392,16 +391,14 @@ static void createClass(ObjString* name, ObjClass* superclass) {
 //< Superclasses not-yet
 }
 //< Classes and Instances not-yet
-//> Types of Values not-yet
-
+//> Types of Values is-falsey
 static bool isFalsey(Value value) {
   return IS_NIL(value) || (IS_BOOL(value) && !AS_BOOL(value));
 }
-//< Types of Values not-yet
-//> Strings not-yet
-
+//< Types of Values is-falsey
+//> Strings concatenate
 static void concatenate() {
-/* Strings not-yet < Garbage Collection not-yet
+/* Strings concatenate < Garbage Collection not-yet
   ObjString* b = AS_STRING(pop());
   ObjString* a = AS_STRING(pop());
 */
@@ -423,7 +420,7 @@ static void concatenate() {
 //< Garbage Collection not-yet
   push(OBJ_VAL(result));
 }
-//< Strings not-yet
+//< Strings concatenate
 //> run
 static InterpretResult run() {
 //> Calls and Functions not-yet
@@ -454,8 +451,10 @@ static InterpretResult run() {
 //> Global Variables not-yet
 #define READ_STRING() AS_STRING(READ_CONSTANT())
 //< Global Variables not-yet
-/* A Virtual Machine binary-op < Types of Values not-yet
+//> binary-op
 
+//< binary-op
+/* A Virtual Machine binary-op < Types of Values binary-op
 #define BINARY_OP(op) \
     do { \
       double b = pop(); \
@@ -463,8 +462,7 @@ static InterpretResult run() {
       push(a op b); \
     } while (false)
 */
-//> Types of Values not-yet
-
+//> Types of Values binary-op
 #define BINARY_OP(valueType, op) \
     do { \
       if (!IS_NUMBER(peek(0)) || !IS_NUMBER(peek(1))) { \
@@ -476,7 +474,7 @@ static InterpretResult run() {
       double a = AS_NUMBER(pop()); \
       push(valueType(a op b)); \
     } while (false)
-//< Types of Values not-yet
+//< Types of Values binary-op
 
   for (;;) {
 //> trace-execution
@@ -519,11 +517,11 @@ static InterpretResult run() {
         break;
       }
 //< op-constant
-//> Types of Values not-yet
+//> Types of Values interpret-literals
       case OP_NIL: push(NIL_VAL); break;
       case OP_TRUE: push(BOOL_VAL(true)); break;
       case OP_FALSE: push(BOOL_VAL(false)); break;
-//< Types of Values not-yet
+//< Types of Values interpret-literals
 //> Global Variables not-yet
       case OP_POP: pop(); break;
 //< Global Variables not-yet
@@ -648,7 +646,7 @@ static InterpretResult run() {
         break;
       }
 //< Superclasses not-yet
-//> Types of Values not-yet
+//> Types of Values interpret-equal
 
       case OP_EQUAL: {
         Value b = pop();
@@ -656,24 +654,25 @@ static InterpretResult run() {
         push(BOOL_VAL(valuesEqual(a, b)));
         break;
       }
-
+        
+//< Types of Values interpret-equal
+//> Types of Values interpret-comparison
       case OP_GREATER:  BINARY_OP(BOOL_VAL, >); break;
       case OP_LESS:     BINARY_OP(BOOL_VAL, <); break;
-//< Types of Values not-yet
-/* A Virtual Machine op-binary < Types of Values not-yet
+//< Types of Values interpret-comparison
+/* A Virtual Machine op-binary < Types of Values op-arithmetic
       case OP_ADD:      BINARY_OP(+); break;
       case OP_SUBTRACT: BINARY_OP(-); break;
       case OP_MULTIPLY: BINARY_OP(*); break;
       case OP_DIVIDE:   BINARY_OP(/); break;
 */
-/* A Virtual Machine op-negate < Types of Values not-yet
+/* A Virtual Machine op-negate < Types of Values op-negate
       case OP_NEGATE:   push(-pop()); break;
 */
-/* Types of Values not-yet < Strings not-yet
+/* Types of Values op-arithmetic < Strings add-strings
       case OP_ADD:      BINARY_OP(NUMBER_VAL, +); break;
 */
-//> Strings not-yet
-
+//> Strings add-strings
       case OP_ADD: {
         if (IS_STRING(peek(0)) && IS_STRING(peek(1))) {
           concatenate();
@@ -687,17 +686,18 @@ static InterpretResult run() {
         }
         break;
       }
-
-//< Strings not-yet
-//> Types of Values not-yet
+//< Strings add-strings
+//> Types of Values op-arithmetic
       case OP_SUBTRACT: BINARY_OP(NUMBER_VAL, -); break;
       case OP_MULTIPLY: BINARY_OP(NUMBER_VAL, *); break;
       case OP_DIVIDE:   BINARY_OP(NUMBER_VAL, /); break;
-
+//< Types of Values op-arithmetic
+//> Types of Values op-not
       case OP_NOT:
         push(BOOL_VAL(isFalsey(pop())));
         break;
-
+//< Types of Values op-not
+//> Types of Values op-negate
       case OP_NEGATE:
         if (!IS_NUMBER(peek(0))) {
           runtimeError("Operand must be a number.");
@@ -706,7 +706,7 @@ static InterpretResult run() {
 
         push(NUMBER_VAL(-AS_NUMBER(pop())));
         break;
-//< Types of Values not-yet
+//< Types of Values op-negate
 //> Global Variables not-yet
 
       case OP_PRINT: {

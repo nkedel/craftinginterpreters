@@ -547,8 +547,8 @@ a new name to a value:
 ^code environment-define
 
 Not exactly brain surgery, but we have made one interesting semantic choice.
-When we add the key to the map, we don't check to see that if it's already
-present. That means that this program works:
+When we add the key to the map, we don't check to see if it's already present.
+That means that this program works:
 
 ```lox
 var a = "before";
@@ -763,7 +763,7 @@ In some other languages, like Pascal, Python, and Go, assignment is a statement.
 
 ```lox
 expression → assignment ;
-assignment → identifier "=" assignment
+assignment → IDENTIFIER "=" assignment
            | equality ;
 ```
 
@@ -1127,13 +1127,13 @@ inside the block's environment. In that `print` statement, both of those
 variables are in scope. In order to find them, the interpreter must search not
 only the current innermost environment, but also any enclosing ones.
 
-<img src="image/statements-and-state/chaining.png" alt="Environments for each scope, linked together." />
-
 We implement this by <span name="cactus">chaining</span> the environments
 together. Each environment has a reference to the environment of the immediately
 enclosing scope. When we look up a variable, we walk that chain from innermost
 out until we find the variable. Starting at the inner scope is how we make local
 variables shadow outer ones.
+
+<img src="image/statements-and-state/chaining.png" alt="Environments for each scope, linked together." />
 
 <aside name="cactus">
 

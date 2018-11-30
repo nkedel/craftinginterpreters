@@ -986,9 +986,9 @@ variable or assignment expression is later executed, but where? One obvious
 place is right in the syntax tree node itself. That&rsquo;s a fine approach, and
 that&rsquo;s where many compilers store the results of analyses like this.</p>
 <p>We could do that, but it would require mucking around with our syntax tree
-generator. Instead, we&rsquo;ll take another common approach and store it off to the
-<span name="side">side</span> in a map that associates each syntax tree node
-with its resolved data:</p>
+generator. Instead, we&rsquo;ll take <span name="side">another</span> common approach
+and store it off to the side in a map that associates each syntax tree node with
+its resolved data:</p>
 <aside name="side">
 <p>I <em>think</em> I&rsquo;ve heard this map called a &ldquo;side table&rdquo; since it&rsquo;s a tabular data
 structure that stores data separately from the objects it relates to. But
@@ -1221,7 +1221,7 @@ function declaration:</p>
 <div class="codehilite"><pre class="insert-before"><span></span>  <span class="kd">private</span> <span class="kd">final</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Boolean</span><span class="o">&gt;&gt;</span> <span class="n">scopes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;&gt;();</span>
 </pre><div class="source-file"><em>lox/Resolver.java</em><br>
 in class <em>Resolver</em></div>
-<pre class="insert"><span></span><span class="kd">private</span> <span class="n">FunctionType</span> <span class="n">currentFunction</span> <span class="o">=</span> <span class="n">FunctionType</span><span class="o">.</span><span class="na">NONE</span><span class="o">;</span>          
+<pre class="insert"><span></span>  <span class="kd">private</span> <span class="n">FunctionType</span> <span class="n">currentFunction</span> <span class="o">=</span> <span class="n">FunctionType</span><span class="o">.</span><span class="na">NONE</span><span class="o">;</span>        
 </pre><pre class="insert-after"><br><span></span>  <span class="n">Resolver</span><span class="o">(</span><span class="n">Interpreter</span> <span class="n">interpreter</span><span class="o">)</span> <span class="o">{</span>                              
 </pre></div>
 

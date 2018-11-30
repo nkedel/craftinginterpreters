@@ -4,13 +4,14 @@
 
 #include "common.h"
 
-//> Strings not-yet
+//> Strings forward-declare-obj
 typedef struct sObj Obj;
+//> forward-declare-obj-string
 typedef struct sObjString ObjString;
+//< forward-declare-obj-string
 
-//< Strings not-yet
+//< Strings forward-declare-obj
 //> Optimization not-yet
-
 #ifdef NAN_TAGGING
 
 // A mask that selects the sign bit.
@@ -71,54 +72,62 @@ static inline Value numToValue(double num) {
 #else
 
 //< Optimization not-yet
-/* Chunks of Bytecode value-h < Types of Values not-yet
-typedef double Value;
-*/
-//> Types of Values not-yet
-#define IS_BOOL(value)    ((value).type == VAL_BOOL)
-#define IS_NIL(value)     ((value).type == VAL_NIL)
-#define IS_NUMBER(value)  ((value).type == VAL_NUMBER)
-//> Strings not-yet
-#define IS_OBJ(value)     ((value).type == VAL_OBJ)
-//< Strings not-yet
-
-//> Strings not-yet
-#define AS_OBJ(value)     ((value).as.object)
-//< Strings not-yet
-#define AS_BOOL(value)    ((value).as.boolean)
-#define AS_NUMBER(value)  ((value).as.number)
-
-#define BOOL_VAL(value)   ((Value){ VAL_BOOL, { .boolean = value } })
-#define NIL_VAL           ((Value){ VAL_NIL, { .number = 0 } })
-#define NUMBER_VAL(value) ((Value){ VAL_NUMBER, { .number = value } })
-//> Strings not-yet
-#define OBJ_VAL(obj)      ((Value){ VAL_OBJ, { .object = (Obj*)obj } })
-//< Strings not-yet
-
+//> Types of Values value-type
 typedef enum {
   VAL_BOOL,
-  VAL_NIL,
+  VAL_NIL, // [user-types]
   VAL_NUMBER,
-//> Strings not-yet
+//> Strings val-obj
   VAL_OBJ
-//< Strings not-yet
+//< Strings val-obj
 } ValueType;
 
+//< Types of Values value-type
+/* Chunks of Bytecode value-h < Types of Values value
+typedef double Value;
+*/
+//> Types of Values value
 typedef struct {
   ValueType type;
   union {
     bool boolean;
     double number;
-//> Strings not-yet
-    Obj* object;
-//< Strings not-yet
-  } as;
+//> Strings union-object
+    Obj* obj;
+//< Strings union-object
+  } as; // [as]
 } Value;
+//< Types of Values value
+//> Types of Values is-macros
+
+#define IS_BOOL(value)    ((value).type == VAL_BOOL)
+#define IS_NIL(value)     ((value).type == VAL_NIL)
+#define IS_NUMBER(value)  ((value).type == VAL_NUMBER)
+//> Strings is-obj
+#define IS_OBJ(value)     ((value).type == VAL_OBJ)
+//< Strings is-obj
+//< Types of Values is-macros
+//> Types of Values as-macros
+
+//> Strings as-obj
+#define AS_OBJ(value)     ((value).as.obj)
+//< Strings as-obj
+#define AS_BOOL(value)    ((value).as.boolean)
+#define AS_NUMBER(value)  ((value).as.number)
+//< Types of Values as-macros
+//> Types of Values value-macros
+
+#define BOOL_VAL(value)   ((Value){ VAL_BOOL, { .boolean = value } })
+#define NIL_VAL           ((Value){ VAL_NIL, { .number = 0 } })
+#define NUMBER_VAL(value) ((Value){ VAL_NUMBER, { .number = value } })
+//> Strings obj-val
+#define OBJ_VAL(object)   ((Value){ VAL_OBJ, { .obj = (Obj*)object } })
+//< Strings obj-val
+//< Types of Values value-macros
 //> Optimization not-yet
 
 #endif
 //< Optimization not-yet
-//< Types of Values not-yet
 //> value-array
 
 typedef struct {
@@ -129,9 +138,9 @@ typedef struct {
 //< value-array
 //> array-fns-h
 
-//> Types of Values not-yet
+//> Types of Values values-equal-h
 bool valuesEqual(Value a, Value b);
-//< Types of Values not-yet
+//< Types of Values values-equal-h
 void initValueArray(ValueArray* array);
 void writeValueArray(ValueArray* array, Value value);
 void freeValueArray(ValueArray* array);

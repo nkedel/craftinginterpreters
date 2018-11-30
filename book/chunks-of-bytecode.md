@@ -599,7 +599,7 @@ When we call that function, after disassembling the instruction at the given
 offset, it returns the offset of the *next* instruction. This is because, as
 we'll see later, instructions can have different sizes.
 
-The core of the debug module is this function:
+The core of the "debug" module is this function:
 
 ^code disassemble-instruction
 
@@ -871,12 +871,12 @@ function to disassemble it:
 
 There's more going on here. As with `OP_RETURN`, we print out the name of the
 opcode. Then we pull out the constant index from the subsequent byte in the
-chunk. We print that index, but that isn't super useful to we human readers. So
+chunk. We print that index, but that isn't super useful to us human readers. So
 we also look up the actual constant value -- since constants *are* known at
 compile-time after all -- and display the value itself too.
 
 This requires some way to print a Lox Value. That function will live in the
-value module, so we include that:
+"value" module, so we include that:
 
 ^code debug-include-value (1 before, 2 after)
 
@@ -926,12 +926,11 @@ in the code array.
 <aside name="side">
 
 This braindead encoding does do one thing right: it keeps the line information
-in a *separate* array instead of interleaving it in the bytecode itself.
-
-Since line information is only used when a runtime error occurs, we don't want
-it next to the bytecode, taking up precious space in the CPU cache and causing
-more cache misses as the interpreter skips past it to get to the real
-instructions it cares about.
+in a *separate* array instead of interleaving it in the bytecode itself. Since
+line information is only used when a runtime error occurs, we don't want it
+between the instructions, taking up precious space in the CPU cache and causing
+more cache misses as the interpreter skips past it to get to the opcodes and
+operands it cares about.
 
 </aside>
 

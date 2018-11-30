@@ -193,10 +193,14 @@ When you reach a nonterminal with that name, you are allowed to pick any of the
 rules for it, whichever floats your boat.
 
 To make this concrete, we need a <span name="turtles">way</span> to write down
-these production rules. Ever since John Backus snuck into Noam Chomsky's
-linguistics class and stole some theory to use for specifying ALGOL 58,
-programmers have been inventing notations for CFGs. For some reason, virtually
-every one of them tweaks the metasyntax in one way or another.
+these production rules. People have been trying to crystallize grammar all the
+way back to Pāṇini's *Ashtadhyayi*, which codified Sanskrit grammar a mere
+couple thousand years ago. Not much progress happened until John Backus and
+company needed a notation for specifying ALGOL 58 and came up with [Backus-Naur
+form][bnf]. Since then, nearly everyone uses some flavor of BNF, tweaked to
+their own tastes.
+
+[bnf]: https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form
 
 I tried to come up with something clean. Each rule is a name, followed by an
 arrow (`→`), followed by its sequence of symbols. Terminals are quoted strings,
@@ -447,14 +451,14 @@ Our scanner used a single Token class to represent all kinds of lexemes. To
 distinguish the different kinds -- think the number `123` versus the string
 `"123"` -- we included a simple TokenType enum.
 
-Syntax trees are not so <span name="token-data">homogenous</span>. Unary
+Syntax trees are not so <span name="token-data">homogeneous</span>. Unary
 expressions have a single operand, binary expressions have two, and literals
 have none. We *could* mush that all together into a single Expression class with
 an arbitrary list of children. Some compilers do.
 
 <aside name="token-data">
 
-Tokens aren't entirely homogenous either. Tokens for literals store the value
+Tokens aren't entirely homogeneous either. Tokens for literals store the value
 but other kinds of lexemes don't need that state. I have seen scanners that use
 different classes for literals and other kinds of lexemes, but I figured I'd
 keep things simpler.

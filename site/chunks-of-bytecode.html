@@ -807,7 +807,7 @@ incrementing <code>i</code> in the loop, we let <code>disassembleInstruction()</
 When we call that function, after disassembling the instruction at the given
 offset, it returns the offset of the <em>next</em> instruction. This is because, as
 we&rsquo;ll see later, instructions can have different sizes.</p>
-<p>The core of the debug module is this function:</p>
+<p>The core of the &ldquo;debug&rdquo; module is this function:</p>
 <div class="codehilite"><div class="source-file"><em>debug.c</em><br>
 add after <em>disassembleChunk</em>()</div>
 <pre><span></span><span class="kt">int</span> <span class="nf">disassembleInstruction</span><span class="p">(</span><span class="n">Chunk</span><span class="o">*</span> <span class="n">chunk</span><span class="p">,</span> <span class="kt">int</span> <span class="n">offset</span><span class="p">)</span> <span class="p">{</span>
@@ -1187,11 +1187,11 @@ add after <em>disassembleChunk</em>()</div>
 
 <p>There&rsquo;s more going on here. As with <code>OP_RETURN</code>, we print out the name of the
 opcode. Then we pull out the constant index from the subsequent byte in the
-chunk. We print that index, but that isn&rsquo;t super useful to we human readers. So
+chunk. We print that index, but that isn&rsquo;t super useful to us human readers. So
 we also look up the actual constant value<span class="em">&mdash;</span>since constants <em>are</em> known at
 compile-time after all<span class="em">&mdash;</span>and display the value itself too.</p>
 <p>This requires some way to print a Lox Value. That function will live in the
-value module, so we include that:</p>
+&ldquo;value&rdquo; module, so we include that:</p>
 <div class="codehilite"><pre class="insert-before"><span></span><span class="cp">#include</span> <span class="cpf">&quot;debug.h&quot;                                     </span><span class="cp"></span>
 </pre><div class="source-file"><em>debug.c</em></div>
 <pre class="insert"><span></span><span class="cp">#include</span> <span class="cpf">&quot;value.h&quot;                                     </span><span class="cp"></span>
@@ -1256,11 +1256,11 @@ we look up the line number at the same index as the current instruction&rsquo;s 
 in the code array.</p>
 <aside name="side">
 <p>This braindead encoding does do one thing right: it keeps the line information
-in a <em>separate</em> array instead of interleaving it in the bytecode itself.</p>
-<p>Since line information is only used when a runtime error occurs, we don&rsquo;t want
-it next to the bytecode, taking up precious space in the CPU cache and causing
-more cache misses as the interpreter skips past it to get to the real
-instructions it cares about.</p>
+in a <em>separate</em> array instead of interleaving it in the bytecode itself. Since
+line information is only used when a runtime error occurs, we don&rsquo;t want it
+between the instructions, taking up precious space in the CPU cache and causing
+more cache misses as the interpreter skips past it to get to the opcodes and
+operands it cares about.</p>
 </aside>
 <p>To implement this, we add another array to Chunk:</p>
 <div class="codehilite"><pre class="insert-before"><span></span>  <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">code</span><span class="p">;</span>       

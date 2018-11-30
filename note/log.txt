@@ -1,8 +1,83 @@
+2018/09/22 - 4288 words, finish third draft "strings"
+2018/09/21 - ink and photoshop illustration
+2018/09/20 - one illustration, pencil another
+2018/09/19 - redo illustration to fix 265
+2018/09/18 - fix 282
+2018/09/17 - fix two illustrations
+2018/09/16 - close two issues
+2018/09/15 - fix 269
+2018/09/14 - merge 2 prs
+2018/09/13 - finish illustration
+2018/09/12 - start illustration
+2018/09/11 - photoshop one illustration
+2018/09/10 - draw and ink one illustration
+2018/09/09 - 922 words, third draft "strings"
+2018/09/08 - taxes
+2018/09/07 - 2695 words, finish second draft "strings"
+2018/09/06 - 1972 words, second draft "strings"
+2018/09/05 - 516 words, second draft "strings"
+2018/09/04 - answers for "strings" challenges
+2018/09/03 - 330 words, finish first draft "strings"
+2018/09/02 - 754 words, first draft "strings"
+2018/09/01 - 1187 words, first draft "strings"
+2018/08/31 - 1363 words, first draft "strings"
+2018/08/30 - 1101 words, first draft "strings"
+2018/08/29 - 505 words, first draft "strings"
+2018/08/28 - 485 words, outline "strings"
+2018/08/27 - 638 words, outline "strings"
+2018/08/26 - 506 words, outline "strings"
+2018/08/25 - 680 words, outline "strings"
+2018/08/24 - 195 words, outline "strings"
+2018/08/23 - 344 words, outline "strings"
+2018/08/22 - start outlining
+2018/08/21 - finish ordering snippets
+2018/08/20 - more ordering snippets
+2018/08/19 - 4 prs, 1 issue
+2018/08/18 - more ordering snippets, fix aside comments in snippets
+2018/08/17 - start ordering snippets
+2018/08/16 - finish splitting up snippets, start outlining "strings"
+2018/08/15 - 10 emails
+2018/08/14 - start slicing up snippets for "strings"
+2018/08/13 - put chapter online
+2018/08/12 - fix three issues
+2018/08/11 - answers for "types of values"
+2018/08/10 - 1257 words, finish third draft "types of values"
+2018/08/09 - 3203 words, third draft "types of values"
+2018/08/08 - photoshop one illustration
+2018/08/07 - draw one illustration
+2018/08/06 - one illustration
+2018/08/05 - redo prose around value size
+2018/08/04 - use bank 14
+2018/08/03 - three illustrations
+2018/08/02 - redo location code in build script
 2018/08/01 - handle trailing commas in snippets better
 2018/07/31 - 5 issues
 2018/07/30 - finish fixing horizontal code scrolling and long lines
 2018/07/29 - work on fixing horizontal code scrolling
 2018/07/28 - 1 pull request, 2 issues, try to fix another
+2018/07/27 - use bank 13
+2018/07/26 - 1766 words, finish second first draft "types of values"
+2018/07/25 - 933 words, second first draft "types of values"
+2018/07/24 - 1000 words, second draft "types of values"
+             (bank 15) 1399 words, second draft "types of values"
+2018/07/23 - 940 words, finish first draft "types of values"
+2018/07/22 - 324 words, first draft "types of values"
+2018/07/21 - use bank 13 (hauberk hackathon)
+2018/07/20 - 516 words, first draft design note for "compiling expressions"
+2018/07/19 - 892 words, first draft "types of values"
+2018/07/18 - 824 words, first draft "types of values"
+2018/07/17 - 100 words, first draft "types of values"
+             (bank 14) 439 words, first draft "types of values"
+2018/07/16 - 14 emails
+2018/07/15 - 203 words, first draft "types of values"
+2018/07/14 - 810 words, outline "types of values"
+2018/07/13 - 793 words, outline "types of values"
+2018/07/12 - 608 words, outline "types of values"
+2018/07/11 - order snippets, start rough outline
+2018/07/10 - split out snippets and start organizing "types of values"
+2018/07/09 - put chapter online
+2018/07/08 - write email
+2018/07/07 - email, typos, and bug reports
 2018/07/06 - 3388 words, finish third draft "compiling expressions"
 2018/07/05 - 446 words, third draft "compiling expressions"
 2018/07/04 - 1955 words, third draft "compiling expressions"
